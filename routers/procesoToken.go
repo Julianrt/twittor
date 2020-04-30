@@ -18,7 +18,7 @@ var IDUsuario string
 
 //ProcesoToken proceso token para extraer sus valores
 func ProcesoToken(tk string) (*models.Claim, bool, string, error) {
-	miClave := []byte("clave")
+	miClave := []byte("clave_perrona_segura")
 	claims := &models.Claim{}
 
 	splitToken := strings.Split(tk, "Bearer")
@@ -40,7 +40,7 @@ func ProcesoToken(tk string) (*models.Claim, bool, string, error) {
 		return claims, encontrado, IDUsuario, nil
 	}
 	if !tkn.Valid {
-		return claims, false, string(""), errors.New("token envalido")
+		return claims, false, string(""), errors.New("token envalido -> " + err.Error())
 	}
 	return claims, false, string(""), err
 }
