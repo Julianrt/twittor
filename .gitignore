@@ -1,0 +1,6 @@
+# go.sum
+go.sum
+
+#image files in uploads
+/uploads/avatars/
+/uploads/banners/

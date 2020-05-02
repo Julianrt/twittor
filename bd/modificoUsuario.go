@@ -14,7 +14,6 @@ import (
 func ModificoUsuario(usuario models.Usuario, ID string) (bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
-
 	db := MongoCN.Database("twittor")
 	col := db.Collection("usuarios")
 
@@ -25,7 +24,9 @@ func ModificoUsuario(usuario models.Usuario, ID string) (bool, error) {
 	if len(usuario.Apellidos) > 0 {
 		registro["apellidos"] = usuario.Apellidos
 	}
-	registro["fechaNacimiento"] = usuario.FechaNacimiento
+	if !usuario.FechaNacimiento.IsZero() {
+		registro["fechaNacimiento"] = usuario.FechaNacimiento
+	}
 	if len(usuario.Avatar) > 0 {
 		registro["avatar"] = usuario.Avatar
 	}
